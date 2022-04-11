@@ -41,50 +41,50 @@ class Header extends Component {
     constructor() {
         super();
         this.state = {
-            modalIsOpen: false,
+            modalOpened: false,
             value: 0,
-            usernameRequired: "dispNone",
+            usernameMandate: "dispNone",
             username: "",
-            loginPasswordRequired: "dispNone",
+            loginPasswordMandate: "dispNone",
             loginPassword: "",
-            firstnameRequired: "dispNone",
+            firstnameMandate: "dispNone",
             firstname: "",
-            lastnameRequired: "dispNone",
+            lastnameMandate: "dispNone",
             lastname: "",
-            emailRequired: "dispNone",
+            emailMandate: "dispNone",
             email: "",
-            registerPasswordRequired: "dispNone",
+            registerPasswordMandate: "dispNone",
             registerPassword: "",
-            contactRequired: "dispNone",
+            contactMandate: "dispNone",
             contact: "",
-            registrationSuccess: false,
+            registrationSuccessful: false,
             loggedIn: sessionStorage.getItem("access-token") == null ? false : true
         }
     }
 
     openModalHandler = () => {
         this.setState({
-            modalIsOpen: true,
+            modalOpened: true,
             value: 0,
-            usernameRequired: "dispNone",
+            usernameMandate: "dispNone",
             username: "",
-            loginPasswordRequired: "dispNone",
+            loginPasswordMandate: "dispNone",
             loginPassword: "",
-            firstnameRequired: "dispNone",
+            firstnameMandate: "dispNone",
             firstname: "",
-            lastnameRequired: "dispNone",
+            lastnameMandate: "dispNone",
             lastname: "",
-            emailRequired: "dispNone",
+            emailMandate: "dispNone",
             email: "",
-            registerPasswordRequired: "dispNone",
+            registerPasswordMandate: "dispNone",
             registerPassword: "",
-            contactRequired: "dispNone",
+            contactMandate: "dispNone",
             contact: ""
         });
     }
 
     closeModalHandler = () => {
-        this.setState({ modalIsOpen: false });
+        this.setState({ modalOpened: false });
     }
 
     tabChangeHandler = (event, value) => {
@@ -92,8 +92,8 @@ class Header extends Component {
     }
 
     loginClickHandler = () => {
-        this.state.username === "" ? this.setState({ usernameRequired: "dispBlock" }) : this.setState({ usernameRequired: "dispNone" });
-        this.state.loginPassword === "" ? this.setState({ loginPasswordRequired: "dispBlock" }) : this.setState({ loginPasswordRequired: "dispNone" });
+        this.state.username === "" ? this.setState({ usernameMandate: "dispBlock" }) : this.setState({ usernameMandate: "dispNone" });
+        this.state.loginPassword === "" ? this.setState({ loginPasswordMandate: "dispBlock" }) : this.setState({ loginPasswordMandate: "dispNone" });
 
         let dataLogin = null;
         let xhrLogin = new XMLHttpRequest();
@@ -127,11 +127,11 @@ class Header extends Component {
     }
 
     registerClickHandler = () => {
-        this.state.firstname === "" ? this.setState({ firstnameRequired: "dispBlock" }) : this.setState({ firstnameRequired: "dispNone" });
-        this.state.lastname === "" ? this.setState({ lastnameRequired: "dispBlock" }) : this.setState({ lastnameRequired: "dispNone" });
-        this.state.email === "" ? this.setState({ emailRequired: "dispBlock" }) : this.setState({ emailRequired: "dispNone" });
-        this.state.registerPassword === "" ? this.setState({ registerPasswordRequired: "dispBlock" }) : this.setState({ registerPasswordRequired: "dispNone" });
-        this.state.contact === "" ? this.setState({ contactRequired: "dispBlock" }) : this.setState({ contactRequired: "dispNone" });
+        this.state.firstname === "" ? this.setState({ firstnameMandate: "dispBlock" }) : this.setState({ firstnameMandate: "dispNone" });
+        this.state.lastname === "" ? this.setState({ lastnameMandate: "dispBlock" }) : this.setState({ lastnameMandate: "dispNone" });
+        this.state.email === "" ? this.setState({ emailMandate: "dispBlock" }) : this.setState({ emailMandate: "dispNone" });
+        this.state.registerPassword === "" ? this.setState({ registerPasswordMandate: "dispBlock" }) : this.setState({ registerPasswordMandate: "dispNone" });
+        this.state.contact === "" ? this.setState({ contactMandate: "dispBlock" }) : this.setState({ contactMandate: "dispNone" });
 
         let dataSignup = JSON.stringify({
             "email_address": this.state.email,
@@ -146,7 +146,7 @@ class Header extends Component {
         xhrSignup.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
                 that.setState({
-                    registrationSuccess: true
+                    registrationSuccessful: true
                 });
             }
         });
@@ -227,7 +227,7 @@ class Header extends Component {
                 </header>
                 <Modal
                     ariaHideApp={false}
-                    isOpen={this.state.modalIsOpen}
+                    isOpen={this.state.modalOpened}
                     contentLabel="Login"
                     onRequestClose={this.closeModalHandler}
                     style={customStyles}
@@ -242,7 +242,7 @@ class Header extends Component {
                             <FormControl required>
                                 <InputLabel htmlFor="username">Username</InputLabel>
                                 <Input id="username" type="text" username={this.state.username} onChange={this.inputUsernameChangeHandler} />
-                                <FormHelperText className={this.state.usernameRequired}>
+                                <FormHelperText className={this.state.usernameMandate}>
                                     <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
@@ -250,7 +250,7 @@ class Header extends Component {
                             <FormControl required>
                                 <InputLabel htmlFor="loginPassword">Password</InputLabel>
                                 <Input id="loginPassword" type="password" loginpassword={this.state.loginPassword} onChange={this.inputLoginPasswordChangeHandler} />
-                                <FormHelperText className={this.state.loginPasswordRequired}>
+                                <FormHelperText className={this.state.loginPasswordMandate}>
                                     <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
@@ -272,7 +272,7 @@ class Header extends Component {
                             <FormControl required>
                                 <InputLabel htmlFor="firstname">First Name</InputLabel>
                                 <Input id="firstname" type="text" firstname={this.state.firstname} onChange={this.inputFirstNameChangeHandler} />
-                                <FormHelperText className={this.state.firstnameRequired}>
+                                <FormHelperText className={this.state.firstnameMandate}>
                                     <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
@@ -280,7 +280,7 @@ class Header extends Component {
                             <FormControl required>
                                 <InputLabel htmlFor="lastname">Last Name</InputLabel>
                                 <Input id="lastname" type="text" lastname={this.state.lastname} onChange={this.inputLastNameChangeHandler} />
-                                <FormHelperText className={this.state.lastnameRequired}>
+                                <FormHelperText className={this.state.lastnameMandate}>
                                     <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
@@ -288,7 +288,7 @@ class Header extends Component {
                             <FormControl required>
                                 <InputLabel htmlFor="email">Email</InputLabel>
                                 <Input id="email" type="text" email={this.state.email} onChange={this.inputEmailChangeHandler} />
-                                <FormHelperText className={this.state.emailRequired}>
+                                <FormHelperText className={this.state.emailMandate}>
                                     <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
@@ -296,7 +296,7 @@ class Header extends Component {
                             <FormControl required>
                                 <InputLabel htmlFor="registerPassword">Password</InputLabel>
                                 <Input id="registerPassword" type="password" registerpassword={this.state.registerPassword} onChange={this.inputRegisterPasswordChangeHandler} />
-                                <FormHelperText className={this.state.registerPasswordRequired}>
+                                <FormHelperText className={this.state.registerPasswordMandate}>
                                     <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
@@ -304,12 +304,12 @@ class Header extends Component {
                             <FormControl required>
                                 <InputLabel htmlFor="contact">Contact No.</InputLabel>
                                 <Input id="contact" type="text" contact={this.state.contact} onChange={this.inputContactChangeHandler} />
-                                <FormHelperText className={this.state.contactRequired}>
+                                <FormHelperText className={this.state.contactMandate}>
                                     <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
-                            {this.state.registrationSuccess === true &&
+                            {this.state.registrationSuccessful === true &&
                                 <FormControl>
                                     <span className="successText">
                                         Registration Successful. Please Login!

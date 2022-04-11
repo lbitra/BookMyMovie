@@ -14,9 +14,9 @@ class Details extends Component {
         super();
         this.state = {
             movie : {
-                genres : [],
+                genreType : [],
                 trailer_url : "",
-                artists : []
+                actors : []
             },
             starIcons : [{
                 id : 1,
@@ -112,7 +112,7 @@ class Details extends Component {
                         <br />
                         <div>
                             <Typography>
-                                <span className="bold">Genres : </span> {movie.genres.join(', ')}
+                                <span className="bold">Genres : </span> {movie.genreType.join(', ')}
                             </Typography>
                         </div>
                         <div>
@@ -158,7 +158,7 @@ class Details extends Component {
                         </div>
                         <div className="paddingRight">
                             <GridList cellHeight={160} cols={2}>
-                                {movie.artists != null && movie.artists.map(artist => (
+                                {movie.actors != null && movie.actors.map(artist => (
                                     <GridListTile
                                         className="gridTile"
                                         onClick={() => this.artistClickHandler(artist.wiki_url)}
